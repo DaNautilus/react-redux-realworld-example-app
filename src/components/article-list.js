@@ -18,8 +18,8 @@ const ArticleList = props => {
   return (
     <div>
       {
-        props.articles.map((article, index) => (
-          <ArticlePreview key={index} article={article} />
+        props.articles.map(article => (
+          <ArticlePreview key={article.slug} article={article} />
         ))
       }
     </div>

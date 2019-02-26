@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
   render() {
     return (
       <nav className="navbar navbar-light">
         <div className="container">
-          <a href="/#" className="navbar-brand">
+          <Link to="/" className="navbar-brand">
             {this.props.appName.toLowerCase()}
-          </a>
+          </Link>
+
+          <ul className="nav navbar-nav pull-xs-right">
+            <li className="nav-item">
+              <Link to="/" className="nav-item">Home</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/login" className="nav-item">Login</Link>
+            </li>
+          </ul>
         </div>
       </nav>
     );

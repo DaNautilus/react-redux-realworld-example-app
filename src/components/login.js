@@ -15,6 +15,7 @@ const mapDispatchToProps = dispatch => ({
 class Login extends Component {
   constructor() {
     super();
+
     this.onChangeEmail = event => this.props.onChangeEmail(event.target.value);
     this.onChangePassword = event => this.props.onChangePassword(event.target.value);
     this.submitForm = (email, password) => event => {

@@ -5,6 +5,7 @@ import Header from './header';
 import PropTypes from 'prop-types';
 import Home from './home';
 import Login from './login';
+import Register from './register';
 import { setToken, Auth } from '../agent';
 
 const mapStateToProps = state => ({
@@ -44,6 +45,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
         </Switch>
       </div>
     );

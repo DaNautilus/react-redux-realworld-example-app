@@ -7,7 +7,7 @@ import Home from './home';
 import Login from './login';
 
 const mapStateToProps = state => ({
-  appName: state.appName
+  appName: state.common.appName
 });
 
 class App extends Component {

@@ -6,7 +6,7 @@ import MainView from './main-view';
 import { Articles } from '../../agent';
 
 const mapStateToProps = state => ({
-  appName: state.appName
+  appName: state.common.appName
 });
 
 const mapDispatchToProps = dispatch => ({

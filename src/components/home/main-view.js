@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ArticleList from '../article-list';
 
 const mapStateToProps = state => ({
-  articles: state.articles
+  articles: state.home.articles
 });
 
 const MainView = props => {

@@ -4,6 +4,7 @@ const isPromise = value => {
 
 export const promiseMiddleware = store => next => action => {
   if (isPromise(action.payload)) {
+    store.dispatch({ type: 'ASYNC_START', subtype: action.type });
     action.payload
       .then(response => {
         action.payload = response;
@@ -11,7 +12,7 @@ export const promiseMiddleware = store => next => action => {
       })
       .catch(error => {
         action.error = true;
-        action.payload = error;
+        action.payload = error.response.body;
         store.dispatch(action);
       });
 

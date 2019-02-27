@@ -16,7 +16,8 @@ let tokenPlugin = request => {
 
 const requests = {
   get: url => superagent.get(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
-  post: (url, body) => superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(response => responseBody(response))
+  post: (url, body) => superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(response => responseBody(response)),
+  put: (url, body) => superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(response => responseBody(response))
 };
 
 export const Articles = {
@@ -26,7 +27,8 @@ export const Articles = {
 export const Auth = {
   current: () => requests.get('/user'),
   login: (email, password) => requests.post('/users/login', { user: { email, password } }),
-  register: (username, email, password) => requests.post('/users', { user: { username, email, password } })
+  register: (username, email, password) => requests.post('/users', { user: { username, email, password } }),
+  save: user => requests.put('/users', { user })
 };
 
 export const setToken = (newToken) => token = newToken;

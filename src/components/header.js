@@ -13,10 +13,10 @@ class Header extends Component {
 
           <ul className="nav navbar-nav pull-xs-right">
             <li className="nav-item">
-              <Link to="/" className="nav-item">Home</Link>
+              <Link to="/" className="nav-link">Home</Link>
             </li>
             <li className="nav-item">
-              <Link to="/login" className="nav-item">Login</Link>
+              <Link to="/login" className="nav-link">Login</Link>
             </li>
           </ul>
         </div>

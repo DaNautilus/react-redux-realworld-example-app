@@ -1,3 +1,5 @@
+import { setToken } from "./agent";
+
 const isPromise = value => {
   return value && typeof value.then === 'function';
 };
@@ -17,6 +19,16 @@ export const promiseMiddleware = store => next => action => {
       });
 
     return;
+  }
+
+  next(action);
+};
+
+// eslint-disable-next-line no-unused-vars
+export const localStorageMiddleware = store => next => action => {
+  if (action.type === 'LOGIN' && !action.error) {
+    window.localStorage.setItem('jwt', action.payload.user.token);
+    setToken(action.payload.user.token);
   }
 
   next(action);

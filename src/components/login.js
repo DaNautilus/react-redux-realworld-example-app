@@ -42,10 +42,13 @@ class Login extends Component {
               <form onSubmit={this.submitForm(email, password)}>
                 <fieldset className="form-group">
                   <input className="form-control form-control-lg" type="email" placeholder="Email" value={email} onChange={this.onChangeEmail} />
+                </fieldset>
+
+                <fieldset className="form-group">
                   <input className="form-control form-control-lg" type="password" placeholder="Password" value={password} onChange={this.onChangePassword} />
                 </fieldset>
 
-                <button className="btn btn-lg btn-primary" type="submit" disabled={this.props.inProgress}>
+                <button className="btn btn-lg btn-primary pull-xs-right" type="submit" disabled={this.props.inProgress}>
                   Sign in
                 </button>
               </form>

@@ -1,17 +1,11 @@
-import { applyMiddleware, createStore, combineReducers } from 'redux';
-import { promiseMiddleware } from './middleware';
+import { applyMiddleware, createStore } from 'redux';
+import { promiseMiddleware, localStorageMiddleware } from './middleware';
+import { createLogger } from 'redux-logger';
 import createHistory from 'history/createBrowserHistory';
-
-import authReducer from './reducers/auth';
-import commonReducer from './reducers/common';
-import homeReducer from './reducers/home';
-
-const reducer = combineReducers({
-  auth: authReducer,
-  common: commonReducer,
-  home: homeReducer
-});
-
-export const store = createStore(reducer, applyMiddleware(promiseMiddleware));
+import reducer from './reducer';
 
 export const history = createHistory();
+
+const getMiddleware = () => applyMiddleware(promiseMiddleware, localStorageMiddleware, createLogger());
+
+export const store = createStore(reducer, getMiddleware());

@@ -23,7 +23,7 @@ const ArticlePreview = props => {
         </div>
       </div>
 
-      <a className="preview" href="/#">
+      <a className="preview-link" href="/#">
         <h1>{article.title}</h1>
         <p>{article.description}</p>
         <span>Read more...</span>

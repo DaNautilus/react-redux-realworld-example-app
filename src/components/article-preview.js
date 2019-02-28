@@ -1,24 +1,49 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Articles } from '../agent';
+
+const FAVORITED_CLASS = 'btn btn-sm btn-primary';
+const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
+
+const mapDispatchToProps = dispatch => ({
+  favorite: slug => dispatch({ type: 'ARTICLE_FAVORITED', payload: Articles.favorite(slug) }),
+  unfavorite: slug => dispatch({ type: 'ARTICLE_UNFAVORITED', payload: Articles.unfavorite(slug) })
+});
 
 const ArticlePreview = props => {
   const article = props.article;
 
+  const favoriteButtonClass = article.favorited ?
+    FAVORITED_CLASS :
+    NOT_FAVORITED_CLASS;
+
+  const onFavoriteClick = ev => {
+    ev.preventDefault();
+    if (article.favorited) {
+      props.unfavorite(article.slug);
+    } else {
+      props.favorite(article.slug);
+    }
+  };
+
   return (
     <div className="article-preview">
       <div className="article-meta">
-        <a href="/#">
-          <img alt="" src={article.author.image}></img>
-        </a>
+        <Link to={`/@${article.author.username}`}>
+          <img src={article.author.image} alt={article.author.username} />
+        </Link>
 
         <div className="info">
-          <a className="author" href="/#">{article.author.username}</a>
+          <Link className="author" to={`/@${article.author.username}`}>
+            {article.author.username}
+          </Link>
           <span className="date">{new Date(article.createdAt).toDateString()}</span>
         </div>
 
         <div className="pull-xs-right">
-          <button className="btn btn-sm btn-outline-primary">
+          <button className={favoriteButtonClass} onClick={onFavoriteClick}>
             <i className="ion-heart"></i> {article.favoritesCount}
           </button>
         </div>
@@ -45,7 +70,9 @@ const ArticlePreview = props => {
 };
 
 ArticlePreview.propTypes = {
-  article: PropTypes.object
+  article: PropTypes.object,
+  favorite: PropTypes.func,
+  unfavorite: PropTypes.func
 };
 
-export default ArticlePreview;
+export default connect(() => ({}), mapDispatchToProps)(ArticlePreview);

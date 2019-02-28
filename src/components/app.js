@@ -9,6 +9,7 @@ import Register from './register';
 import Settings from './settings';
 import Article from './article';
 import Profile from './profile';
+import Editor from './editor';
 import { setToken, Auth } from '../agent';
 
 const mapStateToProps = state => ({
@@ -54,6 +55,8 @@ class App extends Component {
             <Route path="/settings" component={Settings} />
             <Route path="/article/:id" component={Article} />
             <Route path="/@:username" component={Profile} />
+            <Route path="/editor/:slug" component={Editor} />
+            <Route path="/editor" component={Editor} />
           </Switch>
         </div>
       );

@@ -21,6 +21,8 @@ export default (state = defaultState, action) => {
         token: null,
         currentUser: null
       };
+    case 'ARTICLE_SUBMITTED':
+      return { ...state, redirectTo: `/article/${action.payload.article.slug}` };
     case 'SETTINGS_SAVED':
       return {
         ...state,

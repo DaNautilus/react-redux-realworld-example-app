@@ -18,8 +18,8 @@ class Home extends Component {
   componentWillMount() {
     const tab = this.props.token ? 'feed' : 'all';
     const articlesPromise = this.props.token
-      ? Articles.feed
-      : Articles.all;
+      ? Articles.feed()
+      : Articles.all();
 
     this.props.onLoad(tab, articlesPromise);
   }

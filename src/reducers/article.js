@@ -22,8 +22,6 @@ export default (state = {}, action) => {
         comments: state.comments.filter(comment => comment.id !== action.commentId)
       };
     default:
-      break;
+      return state;
   }
-
-  return state;
 };

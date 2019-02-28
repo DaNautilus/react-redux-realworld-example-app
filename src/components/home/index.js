@@ -6,16 +6,22 @@ import MainView from './main-view';
 import { Articles } from '../../agent';
 
 const mapStateToProps = state => ({
-  appName: state.common.appName
+  appName: state.common.appName,
+  token: state.common.token
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: payload => dispatch({ type: 'HOME_PAGE_LOADED', payload })
+  onLoad: (tab, payload) => dispatch({ type: 'HOME_PAGE_LOADED', tab, payload })
 });
 
 class Home extends Component {
   componentWillMount() {
-    this.props.onLoad(Articles.all());
+    const tab = this.props.token ? 'feed' : 'all';
+    const articlesPromise = this.props.token
+      ? Articles.feed
+      : Articles.all;
+
+    this.props.onLoad(tab, articlesPromise);
   }
 
   render() {
@@ -40,7 +46,8 @@ class Home extends Component {
 
 Home.propTypes = {
   appName: PropTypes.string,
-  onLoad: PropTypes.func
+  onLoad: PropTypes.func,
+  token: PropTypes.string
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

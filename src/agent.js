@@ -5,6 +5,8 @@ const superagent = superagentPromise(_superagent, Promise);
 
 const API_ROOT = 'https://conduit.productionready.io/api';
 
+const encode = encodeURIComponent;
+const limit = (count, page) => `limit=${count}&offset=${page ? page * count : 0}`;
 const responseBody = response => response.body;
 
 let token = '';
@@ -24,7 +26,11 @@ const requests = {
 export const Articles = {
   all: () => requests.get('/articles?limit=10'),
   get: slug => requests.get(`/articles/${slug}`),
-  del: slug => requests.del(`/articles/${slug}`)
+  del: slug => requests.del(`/articles/${slug}`),
+  byAuthor: (author, page) => requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
+  favorite: slug => requests.post(`/articles/${slug}/favorite`),
+  favoritedBy: (author, page) => requests.get(`/articles?favorited=${encode(author)}&${limit(5, page)}`),
+  feed: () => requests.get('/articles/feed?limit=10&offset=0')
 };
 
 export const Auth = {
@@ -38,6 +44,12 @@ export const Comments = {
   create: (slug, comment) => requests.post(`/articles/${slug}/comments`, { comment }),
   delete: (slug, commentId) => requests.del(`/articles/${slug}/comments/${commentId}`),
   forArticle: slug => requests.get(`/articles/${slug}/comments`)
+};
+
+export const Profile = {
+  follow: username => requests.post(`/profiles/${username}/follow`),
+  get: username => requests.get(`/profiles/${username}`),
+  unfollow: username => requests.del(`/profiles/${username}/follow`)
 };
 
 export const setToken = (newToken) => token = newToken;

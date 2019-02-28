@@ -8,9 +8,11 @@ import Login from './login';
 import Register from './register';
 import Settings from './settings';
 import Article from './article';
+import Profile from './profile';
 import { setToken, Auth } from '../agent';
 
 const mapStateToProps = state => ({
+  appLoaded: state.common.appLoaded,
   appName: state.common.appName,
   currentUser: state.common.currentUser,
   redirectTo: state.common.redirectTo
@@ -40,17 +42,28 @@ class App extends Component {
   }
 
   render() {
+    if (this.props.appLoaded) {
+      return (
+        <div>
+          <Header appName={this.props.appName} currentUser={this.props.currentUser} />
+
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/settings" component={Settings} />
+            <Route path="/article/:id" component={Article} />
+            <Route path="/@:username" component={Profile} />
+          </Switch>
+        </div>
+      );
+    }
+
     return (
       <div>
-        <Header appName={this.props.appName} currentUser={this.props.currentUser} />
-
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/settings" component={Settings} />
-          <Route path="/article/:id" component={Article} />
-        </Switch>
+        <Header
+          appName={this.props.appName}
+          currentUser={this.props.currentUser} />
       </div>
     );
   }
@@ -61,6 +74,7 @@ App.contextTypes = {
 };
 
 App.propTypes = {
+  appLoaded: PropTypes.bool,
   appName: PropTypes.string,
   currentUser: PropTypes.object,
   children: PropTypes.array,

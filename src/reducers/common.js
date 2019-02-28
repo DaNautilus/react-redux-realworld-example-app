@@ -38,8 +38,6 @@ export default (state = defaultState, action) => {
         currentUser: action.error ? null : action.payload.user
       };
     default:
-      break;
+      return state;
   }
-
-  return state;
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ArticlePreview from './article-preview';
+import ListPagination from './list-pagination';
 
 const ArticleList = props => {
   if (!props.articles) {
@@ -22,12 +23,22 @@ const ArticleList = props => {
           <ArticlePreview key={article.slug} article={article} />
         ))
       }
+
+      <ListPagination
+        pager={props.pager}
+        articlesCount={props.articlesCount}
+        currentPage={props.currentPage}
+        onSetPage={props.onSetPage} />
     </div>
   );
 };
 
 ArticleList.propTypes = {
-  articles: PropTypes.array
+  articles: PropTypes.array,
+  pager: PropTypes.func,
+  articlesCount: PropTypes.number,
+  currentPage: PropTypes.bool,
+  onSetPage: PropTypes.func
 };
 
 export default ArticleList;

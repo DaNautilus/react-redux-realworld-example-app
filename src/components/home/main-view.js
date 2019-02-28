@@ -5,6 +5,7 @@ import ArticleList from '../article-list';
 import YourFeedTab from './your-feed-tab';
 import GlobalFeedTab from './global-feed-tab';
 import TagFilterTab from './tag-filter-tab';
+import { Articles } from '../../agent';
 
 const mapStateToProps = state => ({
   ...state.articleList,
@@ -12,10 +13,17 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onTabClick: (tab, pager, payload) => dispatch({ type: 'CHANGE_TAB', tab, pager, payload })
+  onTabClick: (tab, pager, payload) => dispatch({ type: 'CHANGE_TAB', tab, pager, payload }),
+  onSetPage: (tab, page) => dispatch({
+    type: 'SET_PAGE',
+    page,
+    payload: tab === 'feed' ? Articles.feed(page) : Articles.all(page)
+  }),
 });
 
 const MainView = props => {
+  const onSetPage = page => props.onSetPage(props.tab, page);
+
   return (
     <div className="col-xs-12 col-md-9">
       <div className="feed-toggle">
@@ -25,7 +33,12 @@ const MainView = props => {
           <TagFilterTab tag={props.tag} />
         </ul>
       </div>
-      <ArticleList articles={props.articles} />
+      <ArticleList
+        articles={props.articles}
+        articlesCount={props.articlesCount}
+        currentPage={props.currentPage}
+        onSetPage={onSetPage}
+      />
     </div>
   );
 };
@@ -35,7 +48,10 @@ MainView.propTypes = {
   token: PropTypes.string,
   tab: PropTypes.string,
   tag: PropTypes.string,
-  onTabClick: PropTypes.func
+  onTabClick: PropTypes.func,
+  articlesCount: PropTypes.number,
+  currentPage: PropTypes.bool,
+  onSetPage: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainView);

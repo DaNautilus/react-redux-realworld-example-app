@@ -6,7 +6,8 @@ import { Profile, mapStateToProps } from './index';
 
 const mapDispatchToProps = dispatch => ({
   onLoad: (pager, payload) => dispatch({ type: 'PROFILE_PAGE_LOADED', pager, payload }),
-  onUnload: () => dispatch({ type: 'PROFILE_PAGE_UNLOADED' })
+  onUnload: () => dispatch({ type: 'PROFILE_PAGE_UNLOADED' }),
+  onSetPage: (page, payload) => dispatch({ type: 'SET_PAGE', page, payload })
 });
 
 class ProfileFavorites extends Profile {
@@ -19,6 +20,11 @@ class ProfileFavorites extends Profile {
 
   componentWillUnmount() {
     this.props.onUnload();
+  }
+
+  onSetPage(page) {
+    const promise = Articles.favoritedBy(this.props.profile.username, page);
+    this.props.onSetPage(page, promise);
   }
 
   renderTabs() {

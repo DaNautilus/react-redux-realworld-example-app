@@ -40,7 +40,7 @@ class Login extends Component {
             <div className="col-xs-12 col-md-6 offset-md-3">
               <h1 className="text-xs-center">Sign In</h1>
               <p className="text-xs-center">
-                <a href="#/">Need an account?</a>
+                <a href="/#">Need an account?</a>
               </p>
 
               <ListErrors errors={this.props.errors}></ListErrors>

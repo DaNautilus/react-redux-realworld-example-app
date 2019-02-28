@@ -8,7 +8,7 @@ const TagFilterTab = props => {
 
   return (
     <li className="nav-item">
-      <a href="#/" className="nav-link active">
+      <a href="/#" className="nav-link active">
         <i className="ion-pound"></i> {props.tag}
       </a>
     </li>

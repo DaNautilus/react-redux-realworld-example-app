@@ -23,7 +23,8 @@ const mapDispatchToProps = dispatch => ({
     type: 'UNFOLLOW_USER',
     payload: ProfileAgent.unfollow(username)
   }),
-  onUnload: () => dispatch({ type: 'PROFILE_PAGE_UNLOADED' })
+  onUnload: () => dispatch({ type: 'PROFILE_PAGE_UNLOADED' }),
+  onSetPage: (page, payload) => dispatch({ type: 'SET_PAGE', page, payload }),
 });
 
 class Profile extends Component {
@@ -36,6 +37,11 @@ class Profile extends Component {
 
   componentWillUnmount() {
     this.props.onUnload();
+  }
+
+  onSetPage(page) {
+    const promise = Articles.byAuthor(this.props.profile.username, page);
+    this.props.onSetPage(page, promise);
   }
 
   renderTabs() {
@@ -104,10 +110,10 @@ class Profile extends Component {
               </div>
 
               <ArticleList
-                pager={this.props.pager}
                 articles={this.props.articles}
                 articlesCount={this.props.articlesCount}
-                state={this.props.currentPage} />
+                currentPage={this.props.currentPage}
+                onSetPage={this.onSetPage} />
             </div>
 
           </div>
@@ -130,6 +136,7 @@ Profile.propTypes = {
   onLoad: PropTypes.func,
   onUnload: PropTypes.func,
   match: PropTypes.object,
+  onSetPage: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

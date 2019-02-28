@@ -31,7 +31,7 @@ const LoggedOut = props => {
 };
 
 LoggedOut.propTypes = {
-  currentUser: PropTypes.string
+  currentUser: PropTypes.object
 };
 
 export default LoggedOut;

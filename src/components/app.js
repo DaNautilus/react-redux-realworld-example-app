@@ -7,6 +7,7 @@ import Home from './home';
 import Login from './login';
 import Register from './register';
 import Settings from './settings';
+import Article from './article';
 import { setToken, Auth } from '../agent';
 
 const mapStateToProps = state => ({
@@ -48,6 +49,7 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/settings" component={Settings} />
+          <Route path="/article/:id" component={Article} />
         </Switch>
       </div>
     );
@@ -60,7 +62,7 @@ App.contextTypes = {
 
 App.propTypes = {
   appName: PropTypes.string,
-  currentUser: PropTypes.string,
+  currentUser: PropTypes.object,
   children: PropTypes.array,
   match: PropTypes.object,
   redirectTo: PropTypes.string,

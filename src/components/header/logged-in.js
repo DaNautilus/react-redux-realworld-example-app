@@ -43,7 +43,7 @@ const LoggedIn = props => {
 };
 
 LoggedIn.propTypes = {
-  currentUser: PropTypes.string
+  currentUser: PropTypes.object
 };
 
 export default LoggedIn;

@@ -18,7 +18,7 @@ class Header extends Component {
 
 Header.propTypes = {
   appName: PropTypes.string,
-  currentUser: PropTypes.string
+  currentUser: PropTypes.object
 };
 
 export default Header;

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const ArticlePreview = props => {
   const article = props.article;
@@ -23,7 +24,7 @@ const ArticlePreview = props => {
         </div>
       </div>
 
-      <a className="preview-link" href="/#">
+      <Link className="preview-link" to={`article/${article.slug}`}>
         <h1>{article.title}</h1>
         <p>{article.description}</p>
         <span>Read more...</span>
@@ -38,7 +39,7 @@ const ArticlePreview = props => {
             })
           }
         </ul>
-      </a>
+      </Link>
     </div>
   );
 };

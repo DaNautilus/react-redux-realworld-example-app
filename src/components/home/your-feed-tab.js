@@ -4,8 +4,8 @@ import { Articles } from '../../agent';
 
 const YourFeedTab = props => {
   if (props.token) {
-    const clickHandler = ev => {
-      ev.preventDefault();
+    const clickHandler = event => {
+      event.preventDefault();
       props.onTabClick('feed', Articles.feed, Articles.feed());
     };
 

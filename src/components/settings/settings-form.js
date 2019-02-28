@@ -13,14 +13,14 @@ class SettingsForm extends Component {
       password: ''
     };
 
-    this.updateState = field => ev => {
+    this.updateState = field => event => {
       const state = this.state;
-      const newState = Object.assign({}, state, { [field]: ev.target.value });
+      const newState = Object.assign({}, state, { [field]: event.target.value });
       this.setState(newState);
     };
 
-    this.submitForm = ev => {
-      ev.preventDefault();
+    this.submitForm = event => {
+      event.preventDefault();
 
       const user = Object.assign({}, this.state);
       if (!user.password) {

@@ -13,8 +13,8 @@ const FollowUserButton = props => {
     classes += ' btn-outline-secondary';
   }
 
-  const handleClick = ev => {
-    ev.preventDefault();
+  const handleClick = event => {
+    event.preventDefault();
     if (props.user.following) {
       props.unfollow(props.user.username);
     } else {

@@ -30,7 +30,8 @@ export const Articles = {
   byAuthor: (author, page) => requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
   favorite: slug => requests.post(`/articles/${slug}/favorite`),
   favoritedBy: (author, page) => requests.get(`/articles?favorited=${encode(author)}&${limit(5, page)}`),
-  feed: () => requests.get('/articles/feed?limit=10&offset=0')
+  feed: () => requests.get('/articles/feed?limit=10&offset=0'),
+  byTag: (tag, page) => requests.get(`/articles?tag=${encode(tag)}&${limit(10, page)}`),
 };
 
 export const Auth = {
@@ -50,6 +51,10 @@ export const Profile = {
   follow: username => requests.post(`/profiles/${username}/follow`),
   get: username => requests.get(`/profiles/${username}`),
   unfollow: username => requests.del(`/profiles/${username}/follow`)
+};
+
+export const Tags = {
+  getAll: () => requests.get('/tags')
 };
 
 export const setToken = (newToken) => token = newToken;

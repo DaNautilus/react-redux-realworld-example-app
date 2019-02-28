@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Articles } from '../../agent';
 
 const GlobalFeedTab = props => {
-  const clickHandler = ev => {
-    ev.preventDefault();
+  const clickHandler = event => {
+    event.preventDefault();
     props.onTabClick('all', Articles.all, Articles.all());
   };
   return (
